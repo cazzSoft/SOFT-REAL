@@ -4,10 +4,12 @@
 
      $("#headerInformacion").html('<i class="fa fa-edit"></i> ACTUALIZAR INFORMACÍON');
       $('#formInformacion')[0].reset();//limpiar formulario
+
      $.get('informacion/'+id+'/edit', function (data) {
          $('#nombre').val(data.nombre);
          $('#direccion').val(data.direccion);
          $('#telefonos').val(data.telefonos);
+         $('#idcanton').val(data.canton_id);
       });
 
      $("#btnInformacion").attr('class','btn btn-warning');

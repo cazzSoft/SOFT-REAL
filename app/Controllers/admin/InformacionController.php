@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\InformacionModel;
 use Illuminate\Http\Request;
-
+use DB;
 class InformacionController extends Controller
 {
     /**
@@ -15,8 +15,22 @@ class InformacionController extends Controller
      */
     public function index()
     {
-        $informacion=InformacionModel::all();
-       return view('informacion.index')->with(compact('informacion'));
+        $canton=DB::table('canton_predio')->get();
+        //$provincia=DB::table('provincia_predio')->get();
+        $informacion=DB::table('informacion')
+                            ->join('canton_predio','informacion.canton_id','=','canton_predio.id')
+                            ->join('provincia_predio','informacion.provincia_id','=','provincia_predio.id')
+                            ->select('informacion.id',
+                                    'informacion.nombre',
+                                    'informacion.direccion',
+                                    'informacion.telefonos',
+                                    'informacion.provincia_id',
+                                     'informacion.canton_id',
+                                    'canton_predio.name as canton',
+                                    'provincia_predio.name as provincia'
+                                    )
+                            ->get();
+       return view('informacion.index')->with(compact('informacion','canton'));
     }
 
     /**
@@ -60,13 +74,12 @@ class InformacionController extends Controller
     public function edit($id)
     {
         $id=decrypt($id);
-        $informacion= InformacionModel::find($id);
+        $informacion=InformacionModel::find($id);
         return $informacion;
     }
     public function validar($request){
         $rules = [
              'nombre' => 'required|unique:informacion,nombre',
-
         ];
         $messages = [
             'nombre.unique' => 'El nombre del la Información  ya existe',
@@ -74,7 +87,7 @@ class InformacionController extends Controller
         return $this->validate($request, $rules, $messages);
     }
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.$infor
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -93,7 +106,8 @@ class InformacionController extends Controller
         $informacion->nombre = $request->nombre;
         $informacion->direccion = $request->direccion;
         $informacion->telefonos = $request->telefonos;
-        $informacion->idcanton = $request->idcanton;
+        //$informacion->provincia_id = $request->idprovincia;
+        $informacion->canton_id = $request->idcanton;
 
 
         if($informacion->save()){

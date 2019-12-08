@@ -1,6 +1,0 @@
---Crear columna en tabla users
-...>col:img type string
-...>col:estado 
-
---Crear columna en tabla informacion
-..>col:idcanton

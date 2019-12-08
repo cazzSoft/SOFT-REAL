@@ -55,7 +55,7 @@
                   <th>Nombre</th>
                   <th>Dirección</th>
                   <th>Telefono</th>
-                  <th>idcanton</th>
+                  <th>Canton</th>
                   <th style="min-width: 30%">Opciones</th>
                 </tr>
                 </thead>
@@ -66,7 +66,7 @@
                   <td>{{ $n->nombre }} </td>
                   <td>{{ $n->direccion }} </td>
                   <td>{{ $n->telefonos }} </td>
-                  <td>{{ $n->idcanton }} </td>
+                  <td>{{ $n->canton }} </td>
                   <td style="min-width: 30%"><a  class="btn btn-warning btn-xs" onclick="btnMostraEditarInformacion('{{encrypt($n->id)}}')"><span class="fa fa-edit"></span> Editar </a></td>
                 </tr>
                 @endforeach
