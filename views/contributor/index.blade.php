@@ -2,11 +2,12 @@
 @section('content')
 <section class="content-header" style="margin-bottom:10px;">
       <h1>
-        Información
+        Consulta Básica
+        <small>Contribuyentes</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Información</li>
+        <li class="active">Contribuyentes</li>
       </ol>
 </section>
 
@@ -17,7 +18,8 @@
               <div class="alert alert-{{session('estado')}} alert-dismissible fade in" role="  alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">  <span aria-hidden="true">×</span>
                   </button>
-                  <strong> <i class="fa fa-info"></i>nformación: </strong><br> {{session('mensajeInfo')}}
+                  <strong> <i class="fa fa-info"></i>nformación: </strong><br> {{session('mensajeInfoCloset')}}
+
               </div>
           </div>
       </div>
@@ -38,36 +40,36 @@
     @endif
 
     <div class="row ">
-        <div class="col-xs-12">
+        <div class="col-xs-12 ">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Lista Información</h3>
+            <div class="box-header " style="margin-top:13px;">
+              <h3 class="box-title">Lista de Contribuyentes</h3>
               <div class="box-tools">
-
+                <i class="fa fa-search "style="float:left; margin-top:10px;margin-right:12px;"></i>
+                <div class="input-group input-group-sm"  style="width: 240px;margin-top:auto;">
+                 <input class="form-control mr-sm-8 text-center" type="search" id='busquedad' onkeyup="buscar()" placeholder="Identificacion o Nombres" aria-label="Search"  style="border-radius: 200px;">
+                </div>
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body ">
-              <table id="example1" class="table table-bordered table-hover text-center ">
-                <thead class="">
+              <table  class="table table-bordered table-hover text-center " >
+                <thead class="th">
                 <tr>
                   <th>Id</th>
-                  <th>Nombre</th>
-                  <th>Dirección</th>
-                  <th>Telefono</th>
-                  <th>Canton</th>
-                  <th style="min-width: 30%">Opciones</th>
+                  <th>Identificacion</th>
+                  <th>Nombres</th>
+                  <th style="width: 10%" colspan="2">Opciones</th>
                 </tr>
                 </thead>
-                <tbody>
-                @foreach($informacion as $n)
-                <tr>
+                <tbody id="tableContribuyente">
+                @foreach($contribuyentes as $n)
+                <tr >
                   <td>{{ $n->id }}</td>
-                  <td>{{ $n->nombre }} </td>
-                  <td>{{ $n->direccion }} </td>
-                  <td>{{ $n->telefonos }} </td>
-                  <td>{{ $n->canton }} </td>
-                  <td style="min-width: 30%"><a  class="btn btn-warning btn-xs" onclick="btnMostraEditarInformacion('{{encrypt($n->id)}}')"><span class="fa fa-edit"></span> Editar </a></td>
+                  <td>{{ $n->identificacion }} </td>
+                  <td>{{ $n->nombres }} </td>
+                  <td style="width: 3%"><a  class="btn btn-info btn-xs" onclick="btnMostraVerContibuyente({{ $n->id }})">  <span class="fa fa-eye"></span> ver </a></td>
+
                 </tr>
                 @endforeach
                 </tbody>
@@ -78,12 +80,10 @@
           <!-- /.box -->
         </div>
     </div>
+    @include('contributor.modalContribuyente')
 
-        @include('informacion.modalInformacion')
-
-
-        <script src="{{ asset('js/admin/informacion.js') }}"></script>
-        <script src="{{ asset('js/admin/alertInformacion.js') }}"></script>
+        <script src="{{ asset('js/admin/contribuyente.js') }}"></script>
+        {{-- <script src="{{ asset('js/admin/alertConfirmAcabado.js') }}"></script> --}}
 </section>
 @endsection
 

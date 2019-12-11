@@ -1,0 +1,11 @@
+
+____________________Actualizar esta Ruta en sus ruotes________________________________________________________
+
+Route::get('admin/contributor/search/{buscar?}', 'ContribuyenteController@Search')->name('contributor.search')->middleware('permission:contributor.index');
+______________________________________________________________________________________________________________
+
++++++++++++++++++++++++++++++[Agregar esta ruta en sus routes]++++++++++++++++++++++++++++++++
+
+Route::get('admin/contributor/getcontributor/{id}', 'ContribuyenteController@getContribuidor')->name('contributor.search')->middleware('permission:contributor.index');
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
