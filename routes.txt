@@ -1,11 +1,10 @@
-
-____________________Actualizar esta Ruta en sus ruotes________________________________________________________
-
-Route::get('admin/contributor/search/{buscar?}', 'ContribuyenteController@Search')->name('contributor.search')->middleware('permission:contributor.index');
-______________________________________________________________________________________________________________
-
-+++++++++++++++++++++++++++++[Agregar esta ruta en sus routes]++++++++++++++++++++++++++++++++
-
-Route::get('admin/contributor/getcontributor/{id}', 'ContribuyenteController@getContribuidor')->name('contributor.search')->middleware('permission:contributor.index');
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//rutas de localizacion predio
+Route::resource('/admin/parametrizacion/suelo/localizacionpredio','admin\LocalizacionPredioController')->middleware('auth');
+//ruta tupo calla
+Route::resource('/admin/parametrizacion/suelo/tipoCalle','admin\TipoCalleController')->middleware('auth');
+//ruta tupo suelo
+Route::resource('/admin/parametrizacion/suelo/tipoSuelo','admin\TipoSueloController')->middleware('auth');
+//ruta tupo traspasos
+Route::resource('/admin/parametrizacion/suelo/tipoTraspasos','admin\TipoTraspasosController')->middleware('auth');
+//ruta tupo traspasos
+Route::resource('/admin/parametrizacion/suelo/topografiaPredio','admin\TipoTopografiaPredioController')->middleware('auth');

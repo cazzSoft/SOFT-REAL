@@ -2,12 +2,12 @@
 @section('content')
 <section class="content-header" style="margin-bottom:10px;">
       <h1>
-        Consulta Básica
-        <small>Contribuyentes</small>
+        Topografia
+        <small>Predio</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li class="active">Contribuyentes</li>
+        <li class="active">Topografia Predio</li>
       </ol>
 </section>
 
@@ -18,7 +18,7 @@
               <div class="alert alert-{{session('estado')}} alert-dismissible fade in" role="  alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">  <span aria-hidden="true">×</span>
                   </button>
-                  <strong> <i class="fa fa-info"></i>nformación: </strong><br> {{session('mensajeInfoCloset')}}
+                  <strong> <i class="fa fa-info"></i>nformación: </strong><br> {{session('mensajeInfo')}}
 
               </div>
           </div>
@@ -42,34 +42,37 @@
     <div class="row ">
         <div class="col-xs-12 ">
           <div class="box">
-            <div class="box-header " style="margin-top:13px;">
-              <h3 class="box-title">Lista de Contribuyentes</h3>
+            <div class="box-header">
+              <h3 class="box-title">Lista de Topografia Predio</h3>
               <div class="box-tools">
-                <i class="fa fa-search "style="float:left; margin-top:10px;margin-right:12px;"></i>
-                <div class="input-group input-group-sm"  style="width: 240px;margin-top:auto;">
-                 <input class="form-control mr-sm-8 text-center" type="search" id='busquedad' onkeyup="buscar()" placeholder="Identificacion o Nombres" aria-label="Search"  style="border-radius: 200px;">
+                <div class="input-group input-group-sm"  style="width: 150px;">
+                  <a  class="btn btn-block btn-primary btn-sm" onclick="btnMostrarCreateTopografiaPredio()" >Agregar
+                  </a>
                 </div>
               </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body ">
-              <table  class="table table-bordered table-hover text-center " >
-                <thead class="th">
+              <table id="example1" class="table table-bordered table-hover text-center ">
+                <thead class="">
                 <tr>
                   <th>Id</th>
-                  <th>Identificacion</th>
-                  <th>Nombres</th>
-                  <th style="width: 10%" colspan="2">Opciones</th>
+                  <th>Name</th>
+                  <th>Indice</th>
+                  <th>Estado</th>
+                  <th>Peso</th>
+                  <th style="min-width: 30%">Opciones</th>
                 </tr>
                 </thead>
-                <tbody id="tableContribuyente">
-                @foreach($contribuyentes as $n)
-                <tr >
+                <tbody>
+                @foreach($topografia as $n)
+                <tr>
                   <td>{{ $n->id }}</td>
-                  <td>{{ $n->identificacion }} </td>
-                  <td>{{ $n->nombres }} </td>
-                  <td style="width: 3%"><a  class="btn btn-info btn-xs" onclick="btnMostraVerContibuyente({{ $n->id }})">  <span class="fa fa-eye"></span> ver </a></td>
-
+                  <td>{{ $n->name }} </td>
+                  <td>{{ $n->indice }} </td>
+                  <td>{{ $n->estado }} </td>
+                  <td>{{ $n->peso }} </td>
+                  <td style="min-width: 30%"><a  class="btn btn-warning btn-xs" onclick="btnMostraEditarTopografiaPredio('{{encrypt($n->id)}}')"><span class="fa fa-edit"></span> Editar </a></td>
                 </tr>
                 @endforeach
                 </tbody>
@@ -80,10 +83,10 @@
           <!-- /.box -->
         </div>
     </div>
-    @include('contributor.modalContribuyente')
 
-        <script src="{{ asset('js/admin/contribuyente.js') }}"></script>
-        {{-- <script src="{{ asset('js/admin/alertConfirmAcabado.js') }}"></script> --}}
+        @include('topografiaPredio.modalTopografiaPredio')
+        <script src="{{ asset('js/admin/topografiaPredio.js') }}"></script>
+        <script src="{{ asset('js/admin/alertTopografiaPredio.js') }}"></script>
 </section>
 @endsection
 
